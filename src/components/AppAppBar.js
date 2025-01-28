@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import { styled, alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
@@ -54,28 +54,25 @@ export default function AppAppBar() {
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
             <Sitemark />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button variant="text" color="info" size="small">
-                Features 
-                {/* <div>
-                <Link to='/blog'></Link>
-                </div> */}
-               
-              </Button>
 
+              <Link to="/">
+                <Button variant="text" color="info" size="small">
+                  Home
+                </Button>
+              </Link>
+              <Link to="/blog">
+                <Button variant="text" color="info" size="small">
+                  Blog
+                </Button>
+              </Link>
               <Button variant="text" color="info" size="small">
-                Testimonials
-              </Button>
-              <Button variant="text" color="info" size="small">
-                Highlights
-              </Button>
-              <Button variant="text" color="info" size="small">
-                Pricing
+                O mnie
               </Button>
               <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
                 FAQ
               </Button>
               <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                Blog
+                Kontakt
               </Button>
             </Box>
           </Box>
@@ -120,8 +117,8 @@ export default function AppAppBar() {
                     <CloseRoundedIcon />
                   </IconButton>
                 </Box>
-
-                <MenuItem>Features</MenuItem>
+                <Link to="/blog">Features</Link>
+                {/* <MenuItem>Features</MenuItem> */}
                 <MenuItem>Testimonials</MenuItem>
                 <MenuItem>Highlights</MenuItem>
                 <MenuItem>Pricing</MenuItem>

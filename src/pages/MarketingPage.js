@@ -13,6 +13,8 @@ import Features from '../components-marketing/Features';
 import Testimonials from '../components-marketing/Testimonials';
 import FAQ from '../components-marketing/FAQ';
 import Footer from '../components/Footer';
+// import Section from '../components/Section';
+
 
 export default function MarketingPage(props) {
   return (
@@ -27,6 +29,8 @@ export default function MarketingPage(props) {
       
    
         <Highlights />
+        <Divider />
+        {/* <Section /> */}
         <Divider />
         <Features />
         <Divider />
