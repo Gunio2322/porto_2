@@ -3,29 +3,33 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useRoutes,
 } from "react-router-dom";
 
 import MarketingPage from "./pages/MarketingPage";
-import Blog from "./pages/Blog";
-import Post from "./pages/Post";
+import Latest from "./pages/LatestPage";
+import Post from "./components-blog/Post";
+import MainContent from "./components-blog/Latest";
+import DraftForm from "./pages/admin/CreatePostPage";
+import GetPosts from "./pages/admin/GetPostsPage";
+import BlogContent from "./pages/Blog";
+// import EditorDraftPost from "./pages/admin/editPost";
+import EditPost from "./pages/admin/EditPost";
 function App() {
   return (
-    <div>
-      <Routes>
 
+      <div>
+        <Routes>
+          <Route path='/' element={<MarketingPage />} />
+          <Route path="/blog" element={<BlogContent />} />
+          <Route path="/latest" element={<Latest />} />
+          <Route path="/post/:slug/:_id" element={<Post />} />
+          <Route path="/test" element={<MainContent />} />
+          <Route path="/admin/create" element={<DraftForm />} />
+          <Route path="/admin/get" element={<GetPosts />} />
+          <Route path="/admin/edit/:slug/:_id" element={<EditPost />} />
+        </Routes>
+      </div>
 
-
-        <Route path='/' element={<MarketingPage />}></Route>
-        <Route path="/blog" element={<Blog />}></Route>
-        <Route path="/post" element={<Post />}></Route>
-
-
-
-
-      </Routes>
-
-    </div>
   );
 }
 

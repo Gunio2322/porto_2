@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { convertFromRaw } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 import DOMPurify from 'dompurify';
-
+import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import Avatar from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
@@ -123,103 +124,118 @@ export function Search() {
   );
 }
 
-export default function Latest() {
+export default function BlogContent() {
 
-const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
 
-  
-const [focusedCardIndex, setFocusedCardIndex] = React.useState(null);
+  const [focusedCardIndex, setFocusedCardIndex] = React.useState(null);
 
-const handleFocus = (index) => {
-  setFocusedCardIndex(index);
-};
-
-const handleBlur = () => {
-  setFocusedCardIndex(null);
-};
-
-const handleClick = () => {
-  console.info('You clicked the filter chip.');
-};
-
-const truncateDescription = (description, maxLength) => {
-  if (!description) return ''; // Sprawdzenie, czy description jest zdefiniowane
-  if (description.length > maxLength) {
-    return description.substring(0, maxLength) + '... czytaj więcej';
-  }
-  return description;
-};
-
-useEffect(() => {
-  const fetchPosts = async () => {
-    try {
-      const response = await fetch('http://localhost:3001/api/getPosts');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      const sortedPosts = data.sort((a, b) => new Date(b.date) - new Date(a.date));
-      setPosts(sortedPosts.slice(0, 3));
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-    }
+  const handleFocus = (index) => {
+    setFocusedCardIndex(index);
   };
 
-  fetchPosts();
-}, []);
+  const handleBlur = () => {
+    setFocusedCardIndex(null);
+  };
+
+  const handleClick = (post) => {
+    navigate(`/post/${post.slug}/${post._id}`);
+  };
+
+  const truncateDescription = (description, maxLength) => {
+    if (!description) return ''; // Sprawdzenie, czy description jest zdefiniowane
+    if (description.length > maxLength) {
+      return description.substring(0, maxLength) + '... czytaj więcej...';
+    }
+    return description;
+  };
+
+
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/getPosts');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        // const sortedPosts = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        // setPosts(sortedPosts.slice(0, 3));
+        setPosts(data)
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
 
 
   return (
 
-  
+
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
 
-      
 
 
 
-  <Grid container spacing={2} columns={12}>
-  {posts?.map((post) => 
-        <Grid size={{ xs: 12, md: 4 }}>
-          <SyledCard
-            variant="outlined"
-            onFocus={() => handleFocus(5)}
-            onBlur={handleBlur}
-            tabIndex={0}
-            className={focusedCardIndex === 5 ? 'Mui-focused' : ''}
-            sx={{ height: '100%' }}
-          >
-            <CardMedia
-              component="img"
-              alt="green iguana"
-              src={post.featuredImageUrl}
-              sx={{
-                height: { sm: 'auto', md: '50%' },
-                aspectRatio: { sm: '16 / 9', md: '' },
-              }}
-            />
-            <SyledCardContent>
-              <Typography      gutterBottom variant="caption" component="div">
-              {post.date}
-              </Typography>
-              <Typography    gutterBottom variant="h6" component="div">
-              {post.title}
-              </Typography>
-              <Typography                 gutterBottom>
-              {truncateDescription(post.description, 50)}               </Typography>
-              <StyledTypography   variant="body2" color="text.secondary" gutterBottom>
-              
-              </StyledTypography>
-            </SyledCardContent>
-            <Author author={post.author} />
-          </SyledCard>
-        </Grid>
+
+      <Grid container spacing={2} columns={12}>
+        {posts?.map((post) =>
   
-)}
-      
-      </Grid> 
 
-      
-  </Box>
+
+
+
+
+          <Grid onClick={() => handleClick(post)}  size={{ xs: 12, md: 4 }}>
+            {/* <Link to={`/post/${post._id}`} > */}
+            {/* <div key={post.slug}></div> */}
+              <SyledCard
+                variant="outlined"
+                onFocus={() => handleFocus(5)}
+                onBlur={handleBlur}
+                tabIndex={0}
+                className={focusedCardIndex === 5 ? 'Mui-focused' : ''}
+                sx={{ height: '100%' }}
+              >
+                <CardMedia
+                  component="img"
+                  alt="green iguana"
+                  src={post.featuredImageUrl}
+                  sx={{
+                    height: { sm: 'auto', md: '50%' },
+                    aspectRatio: { sm: '16 / 9', md: '' },
+                  }}
+                />
+                <SyledCardContent>
+                  <Typography gutterBottom variant="caption" component="div">
+                    {post.date}
+                  </Typography>
+                  <Typography gutterBottom variant="h6" component="div">
+                    {post.title}
+                  </Typography>
+                  <Typography
+                  gutterBottom variant="span" component="div" >                   {truncateDescription(post.description, 100)}
+
+                  </Typography>
+                  <StyledTypography  variant="body2" color="text.secondary" gutterBottom>
+
+                  </StyledTypography>
+                </SyledCardContent>
+                <Author author={post.author} />
+              </SyledCard>
+            {/* </Link> */}
+          </Grid>
+
+        )}
+
+      </Grid>
+
+
+    </Box>
   );
 }
