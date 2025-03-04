@@ -60,49 +60,6 @@ const StyledTypography = styled(Typography)({
   textOverflow: 'ellipsis',
 });
 
-// function Author({ authors }) {
-//   return (
-//     <Box
-//       sx={{
-//         display: 'flex',
-//         flexDirection: 'row',
-//         gap: 2,
-//         alignItems: 'center',
-//         justifyContent: 'space-between',
-//         padding: '16px',
-//       }}
-//     >
-//       <Box
-//         sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}
-//       >
-//         <AvatarGroup max={3}>
-//           {/* {authors.map((author, index) => (
-//             <Avatar
-//               key={index}
-//               alt={author.name}
-//               src={author.avatar}
-//               sx={{ width: 24, height: 24 }}
-//             />
-//           ))} */}
-//         </AvatarGroup>
-//         <Typography variant="caption">
-//           {/* {authors.map((author) => author.name).join(', ')} */}
-//         </Typography>
-//       </Box>
-//       <Typography variant="caption">July 14, 2021</Typography>
-//     </Box>
-//   );
-// }
-
-// Author.propTypes = {
-//   authors: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       avatar: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//     }),
-//   ).isRequired,
-// };
-
 export function Search() {
   return (
     <FormControl sx={{ width: { xs: '100%', md: '25ch' } }} variant="outlined">
@@ -124,7 +81,7 @@ export function Search() {
   );
 }
 
-export default function BlogContent() {
+export default function Products() {
 
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();

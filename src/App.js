@@ -14,6 +14,8 @@ import GetPosts from "./pages/admin/GetPostsPage";
 import BlogContent from "./pages/Blog";
 // import EditorDraftPost from "./pages/admin/editPost";
 import EditPost from "./pages/admin/EditPost";
+import CreatePost from "./pages/admin-shop-pages/PanelShopAdmin";
+import CardProduct from "./pages/admin-shop-pages/CardProduct";
 function App() {
   return (
 
@@ -27,6 +29,8 @@ function App() {
           <Route path="/admin/create" element={<DraftForm />} />
           <Route path="/admin/get" element={<GetPosts />} />
           <Route path="/admin/edit/:slug/:_id" element={<EditPost />} />
+          <Route path="/admin/shop" element={<CreatePost />} />
+          <Route path="/card" element={<CardProduct />} />
         </Routes>
       </div>
 
