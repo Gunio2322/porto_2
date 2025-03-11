@@ -21,7 +21,7 @@ const CreatePost = () => {
 
   const onSubmit = async (data) => {
     const slug = slugify(data.title)
-    console.log(slug)
+    // console.log(slug)
     const content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
     const postData = { ...data, content, slug: slug, _id: unique_id };
 
@@ -39,7 +39,7 @@ const CreatePost = () => {
       }
 
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
       reset(); // Resetowanie formularza po pomyślnym przesłaniu
     } catch (error) {
       console.error('Error saving content:', error);

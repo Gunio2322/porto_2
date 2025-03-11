@@ -15,7 +15,8 @@ import BlogContent from "./pages/Blog";
 // import EditorDraftPost from "./pages/admin/editPost";
 import EditPost from "./pages/admin/EditPost";
 import CreatePost from "./pages/admin-shop-pages/PanelShopAdmin";
-import CardProduct from "./pages/admin-shop-pages/CardProduct";
+import ProductsPage from "./pages/ShopPages/ProductsPage";
+import Product from "./pages/ShopPages/ProductPages";
 function App() {
   return (
 
@@ -30,7 +31,9 @@ function App() {
           <Route path="/admin/get" element={<GetPosts />} />
           <Route path="/admin/edit/:slug/:_id" element={<EditPost />} />
           <Route path="/admin/shop" element={<CreatePost />} />
-          <Route path="/card" element={<CardProduct />} />
+          <Route path="/shop" element={<ProductsPage />} />
+          <Route path="/product/:slug/:_id" element={<Product />} />
+  
         </Routes>
       </div>
 

@@ -12,7 +12,7 @@ import BoxBasic from '../components-blog/Test';
 export default function Blog(props, post) {
   return (
 <>
-<Helmet>
+{/* <Helmet>
       <title>{post.title} | My Blog</title>
       <meta name="description" content={post.excerpt} />
       <meta property="og:title" content={post.title} />
@@ -20,7 +20,7 @@ export default function Blog(props, post) {
       <meta property="og:type" content="article" />
       <meta property="og:url" content={`https://myblog.com/posts/${post.id}`} />
       <meta property="og:image" content={post.image} />
-    </Helmet>
+    </Helmet> */}
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
       <AppAppBar />

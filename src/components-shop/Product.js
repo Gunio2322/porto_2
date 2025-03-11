@@ -8,7 +8,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import AppTheme from '../shared-theme/AppTheme';
 import AppAppBar from '../components/AppAppBar';
-import MainContent from './Latest';
+
 import Footer from '../components/Footer';
 import { Link } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider';
 import { createTheme } from "@mui/material";
-
+import Gallery from "../components/gallery/Gallery";
 const theme = createTheme({
   components: {
     MuiTypography: {
@@ -39,7 +39,7 @@ const theme = createTheme({
 });
 
 
-export default function Post(props) {
+export default function Product(props) {
 
   const [data, setData] = useState([]);
   const { slug } = useParams();
@@ -56,7 +56,7 @@ export default function Post(props) {
     };
 
     try {
-      const response = await fetch(`http://localhost:3001/api/postFilter/${_id}`, paramsOptions);
+      const response = await fetch(`http://localhost:3001/api/productFilter/${_id}`, paramsOptions);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -97,16 +97,16 @@ export default function Post(props) {
         sx={{ display: 'flex', flexDirection: 'column', my: 16, gap: 4 }}
       >
         <Link href="/blog" underline="none" color="lightblue"     >
-          {'Back to blog'} 
+          {'Back to shop'} 
         </Link>
-
+<Gallery />
         <Typography variant="h1"  gutterBottom>
-        {data.title} 
+        {data.name} 
         </Typography>
         {/* <Typography variant="body1" gutterBottom>
           Data
         </Typography> */}
-        <Divider textAlign="left">DATA</Divider>
+        {/* <Divider textAlign="left">DATA</Divider> */}
 
         <Box
           component="img"
@@ -128,9 +128,9 @@ export default function Post(props) {
             // lazy: true
           }}
           alt=""
-          src={data.featuredImageUrl}
+          src={data.img_1}
         />
-  <Divider textAlign="right">Category</Divider>
+  {/* <Divider textAlign="right">Category</Divider> */}
 
         <Typography variant="body1" component="span" sx={{ mt: 1 }}>
         <div dangerouslySetInnerHTML={{ __html: contentHTML }} />

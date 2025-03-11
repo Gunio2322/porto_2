@@ -20,13 +20,13 @@ const CreateProduct = () => {
   };
 
   const onSubmit = async (data) => {
-    const slug = slugify(data.title)
-    console.log(slug)
+    const slug = slugify(data.name)
+  
     const content = JSON.stringify(convertToRaw(editorState.getCurrentContent()));
-    const postData = { ...data, content, slug: slug, _id: unique_id };
+    const postData = { ...data, content, slug: slug, _id: unique_id, img_1: data.img_1, img_2: data.img_2, img_3: data.img_3, img_4: data.img_4, img_5: data.img_5 };
 
     try {
-      const response = await fetch(`http://localhost:3001/api/newPost`, {
+      const response = await fetch(`http://localhost:3001/api/newProduct`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ const CreateProduct = () => {
       }
 
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
       reset(); // Resetowanie formularza po pomyślnym przesłaniu
     } catch (error) {
       console.error('Error saving content:', error);
@@ -47,7 +47,7 @@ const CreateProduct = () => {
   };
 
   // Watch for changes in the featuredImageUrl field and update the image preview
-  const featuredImageUrl = watch('featuredImageUrl');
+  const featuredImageUrl = watch('img_1');
   useEffect(() => {
     setImagePreview(featuredImageUrl);
   }, [featuredImageUrl]);
@@ -60,7 +60,7 @@ const CreateProduct = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
 
         <Controller
-          name="productName"
+          name="name"
           control={control}
           defaultValue=""
           rules={{ required: 'Title is required', maxLength: { value: 100, message: 'Title cannot exceed 100 characters' } }}
@@ -140,7 +140,75 @@ const CreateProduct = () => {
 
 
         <Controller
-          name="featuredImageUrl"
+          name="img_1"
+          control={control}
+          defaultValue=""
+          rules={{ required: 'Featured Image URL is required', pattern: { value: /^(ftp|http|https):\/\/[^ "]+$/, message: 'Invalid URL format' } }}
+          render={({ field, fieldState }) => (
+            <TextField
+              {...field}
+              label="Featured Image URL"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              error={!!fieldState.error}
+              helperText={fieldState.error ? fieldState.error.message : null}
+            />
+          )}
+        />
+                <Controller
+          name="img_2"
+          control={control}
+          defaultValue=""
+          rules={{ required: 'Featured Image URL is required', pattern: { value: /^(ftp|http|https):\/\/[^ "]+$/, message: 'Invalid URL format' } }}
+          render={({ field, fieldState }) => (
+            <TextField
+              {...field}
+              label="Featured Image URL"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              error={!!fieldState.error}
+              helperText={fieldState.error ? fieldState.error.message : null}
+            />
+          )}
+        />
+                <Controller
+          name="img_3"
+          control={control}
+          defaultValue=""
+          rules={{ required: 'Featured Image URL is required', pattern: { value: /^(ftp|http|https):\/\/[^ "]+$/, message: 'Invalid URL format' } }}
+          render={({ field, fieldState }) => (
+            <TextField
+              {...field}
+              label="Featured Image URL"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              error={!!fieldState.error}
+              helperText={fieldState.error ? fieldState.error.message : null}
+            />
+          )}
+        />
+                <Controller
+          name="img_4"
+          control={control}
+          defaultValue=""
+          rules={{ required: 'Featured Image URL is required', pattern: { value: /^(ftp|http|https):\/\/[^ "]+$/, message: 'Invalid URL format' } }}
+          render={({ field, fieldState }) => (
+            <TextField
+              {...field}
+              label="Featured Image URL"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              error={!!fieldState.error}
+              helperText={fieldState.error ? fieldState.error.message : null}
+            />
+          )}
+        />
+                <Controller
+          name="img_5"
           control={control}
           defaultValue=""
           rules={{ required: 'Featured Image URL is required', pattern: { value: /^(ftp|http|https):\/\/[^ "]+$/, message: 'Invalid URL format' } }}

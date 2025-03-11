@@ -183,7 +183,7 @@ export default function BlogContent() {
 
 
 
-      <Grid container spacing={2} columns={12}>
+      <Grid container spacing={6} columns={12}>
         {posts?.map((post) =>
   
 

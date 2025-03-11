@@ -60,6 +60,49 @@ const StyledTypography = styled(Typography)({
   textOverflow: 'ellipsis',
 });
 
+// function Author({ authors }) {
+//   return (
+//     <Box
+//       sx={{
+//         display: 'flex',
+//         flexDirection: 'row',
+//         gap: 2,
+//         alignItems: 'center',
+//         justifyContent: 'space-between',
+//         padding: '16px',
+//       }}
+//     >
+//       <Box
+//         sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}
+//       >
+//         <AvatarGroup max={3}>
+//           {/* {authors.map((author, index) => (
+//             <Avatar
+//               key={index}
+//               alt={author.name}
+//               src={author.avatar}
+//               sx={{ width: 24, height: 24 }}
+//             />
+//           ))} */}
+//         </AvatarGroup>
+//         <Typography variant="caption">
+//           {/* {authors.map((author) => author.name).join(', ')} */}
+//         </Typography>
+//       </Box>
+//       <Typography variant="caption">July 14, 2021</Typography>
+//     </Box>
+//   );
+// }
+
+// Author.propTypes = {
+//   authors: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       avatar: PropTypes.string.isRequired,
+//       name: PropTypes.string.isRequired,
+//     }),
+//   ).isRequired,
+// };
+
 export function Search() {
   return (
     <FormControl sx={{ width: { xs: '100%', md: '25ch' } }} variant="outlined">
@@ -83,7 +126,7 @@ export function Search() {
 
 export default function Products() {
 
-  const [posts, setPosts] = useState([]);
+  const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
   const [focusedCardIndex, setFocusedCardIndex] = React.useState(null);
@@ -96,8 +139,8 @@ export default function Products() {
     setFocusedCardIndex(null);
   };
 
-  const handleClick = (post) => {
-    navigate(`/post/${post.slug}/${post._id}`);
+  const handleClick = (product) => {
+    navigate(`/product/${product.slug}/${product._id}`);
   };
 
   const truncateDescription = (description, maxLength) => {
@@ -111,22 +154,22 @@ export default function Products() {
 
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/getPosts');
+        const response = await fetch('http://localhost:3001/api/getProducts');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
         // const sortedPosts = data.sort((a, b) => new Date(b.date) - new Date(a.date));
         // setPosts(sortedPosts.slice(0, 3));
-        setPosts(data)
+        setProducts(data)
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
     };
 
-    fetchPosts();
+    fetchProducts();
   }, []);
 
 
@@ -140,51 +183,56 @@ export default function Products() {
 
 
 
-      <Grid container spacing={2} columns={12}>
-        {posts?.map((post) =>
-  
+      <Grid container spacing={6} columns={12}>
+        {products?.map((product) =>
 
 
 
 
 
-          <Grid onClick={() => handleClick(post)}  size={{ xs: 12, md: 4 }}>
+
+          <Grid onClick={() => handleClick(product)} size={{ xs: 12, md: 4 }}>
             {/* <Link to={`/post/${post._id}`} > */}
             {/* <div key={post.slug}></div> */}
-              <SyledCard
-                variant="outlined"
-                onFocus={() => handleFocus(5)}
-                onBlur={handleBlur}
-                tabIndex={0}
-                className={focusedCardIndex === 5 ? 'Mui-focused' : ''}
-                sx={{ height: '100%' }}
-              >
-                <CardMedia
-                  component="img"
-                  alt="green iguana"
-                  src={post.featuredImageUrl}
-                  sx={{
-                    height: { sm: 'auto', md: '50%' },
-                    aspectRatio: { sm: '16 / 9', md: '' },
-                  }}
-                />
-                <SyledCardContent>
-                  <Typography gutterBottom variant="caption" component="div">
-                    {post.date}
-                  </Typography>
-                  <Typography gutterBottom variant="h6" component="div">
-                    {post.title}
-                  </Typography>
-                  <Typography
-                  gutterBottom variant="span" component="div" >                   {truncateDescription(post.description, 100)}
+            <SyledCard
+              variant="outlined"
+              onFocus={() => handleFocus(5)}
+              onBlur={handleBlur}
+              tabIndex={0}
+              className={focusedCardIndex === 5 ? 'Mui-focused' : ''}
+              sx={{ height: '100%' , padding: 1 }}
+            >
+              <CardMedia
+                component="img"
+                alt="green iguana"
+                src={product.img_1}
+                sx={{
+                  height: { sm: 'auto', md: '50%' },
+                  aspectRatio: { sm: '16 / 9', md: '' },
+                }}
+              />
+              <SyledCardContent>
+              <Typography gutterBottom variant="h6" component="div">
+                  {product.name}
+                </Typography>
+                
+                {/* <Typography gutterBottom variant="caption" component="div">
+                    {product.date}
+                  </Typography> */}
+                <Typography gutterBottom variant="h3" component="div">
+                <p> {product.price}zł</p>
+                </Typography>
 
-                  </Typography>
-                  <StyledTypography  variant="body2" color="text.secondary" gutterBottom>
+                <Typography
+                  gutterBottom variant="span" component="div">
 
-                  </StyledTypography>
-                </SyledCardContent>
-                {/* <Author author={post.author} /> */}
-              </SyledCard>
+                </Typography>
+                <StyledTypography variant="body2" color="text.secondary" gutterBottom>
+
+                </StyledTypography>
+              </SyledCardContent>
+              {/* <Author author={post.author} /> */}
+            </SyledCard>
             {/* </Link> */}
           </Grid>
 

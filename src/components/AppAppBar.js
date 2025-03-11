@@ -65,9 +65,23 @@ export default function AppAppBar() {
                   Blog
                 </Button>
               </Link>
+              <Link to="/shop">
+                <Button variant="text" color="info" size="small">
+                  Shop
+                </Button>
+              </Link>
+              <Link to="/admin/create">
               <Button variant="text" color="info" size="small">
-                O mnie
+           
+             AdminBlog
               </Button>
+              </Link>
+              <Link to="/admin/shop">
+              <Button variant="text" color="info" size="small">
+           
+             AdminShop
+              </Button>
+              </Link>
               <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
                 FAQ
               </Button>

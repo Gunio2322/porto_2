@@ -158,8 +158,7 @@ useEffect(() => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      const sortedPosts = data.sort((a, b) => new Date(b.date) - new Date(a.date));
-      setPosts(sortedPosts.slice(0, 3));
+      setPosts(data.slice(-3));
     } catch (error) {
       console.error('Error fetching posts:', error);
     }
